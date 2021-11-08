@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1= title
+  - let restaurants  = [{restaurantType:"Veg", price: 1000, capacity:"50 members"},{restaurantType:"Non-Veg", price: 800, capacity:"20 members"},{restaurantType:"Chinese", price: 400, capacity:"250 members"}]
+  div(class="container-fluid mt-3")
+  div(class="row")
+    each restaurant,index in restaurants
+        div(class="col-sm-4" onclick=`buy(${index})`) #{restaurant.restaurantType} - #{restaurant.price} - #{restaurant.capacity}
+    script.
+     
+      function buy(itemNo)
+      {
+        alert(`You purchased Item ${itemNo+1}`)
+      }
