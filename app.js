@@ -4,13 +4,60 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+const connectionString =
+process.env.MONGO_CON
+mongoose = require('mongoose');
+mongoose.connect(connectionString,
+{useNewUrlParser: true,
+useUnifiedTopology: true});
+
+var restaurant = require("./models/restaurant");
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var restaurantRouter = require('./routes/restaurant');
 var addmodsRouter = require('./routes/addmods');
 var selectorRouter = require('./routes/selector');
+var resourceRouter = require('./routes/resource');
 
 var app = express();
+
+// We can seed the collection if needed on server start
+async function recreateDB() {
+  // Delete everything
+  await restaurant.deleteMany();
+  let instance1 = new restaurant({
+    restaurantType: "Veg",
+    price: 1000,
+    capacity: "500 members",
+  });
+  instance1.save(function (err, doc) {
+    if (err) return console.error(err);
+    console.log("First object saved");
+  });
+  let instance2 = new restaurant({
+    restaurantType: "Non-Veg",
+    price: 2000,
+    capacity: "150 members",
+  });
+  instance2.save(function (err, doc) {
+    if (err) return console.error(err);
+    console.log("Second object saved");
+  });
+  let instance3 = new restaurant({
+    restaurantType: "Chinese",
+    price: 300,
+    capacity: "80 members",
+  });
+  instance3.save(function (err, doc) {
+    if (err) return console.error(err);
+    console.log("Third object saved");
+  });
+}
+let reseed = true;
+if (reseed) {
+  recreateDB();
+}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -27,7 +74,7 @@ app.use('/users', usersRouter);
 app.use('/restaurant', restaurantRouter);
 app.use('/addmods', addmodsRouter);
 app.use('/selector', selectorRouter);
-
+app.use('/resource', resourceRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
