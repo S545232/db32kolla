@@ -12,19 +12,19 @@ router.get('/', api_controller.api);
 /// COSTUME ROUTES /// 
  
 // POST request for creating a Costume.  
-router.post('/restaurants', restaurant_controller.restaurant_create_post); 
+router.post('/restaurant', restaurant_controller.restaurant_create_post); 
  
 // DELETE request to delete Costume. 
-router.delete('/restaurants/:id',restaurant_controller.restaurant_delete); 
+router.delete('/restaurant/:id',restaurant_controller.restaurant_delete); 
  
 // PUT request to update Costume. 
-router.put('/restaurants/:id', 
+router.put('/restaurant/:id', 
 restaurant_controller.restaurant_update_put); 
  
 // GET request for one Costume. 
-router.get('/restaurants/:id', restaurant_controller.restaurant_detail);
+router.get('/restaurant/:id', restaurant_controller.restaurant_detail);
  
 // GET request for list of all Costume items. 
-router.get('/restaurants', restaurant_controller.restaurant_view_all_Page); 
+router.get('/restaurant', restaurant_controller.restaurant_view_all_Page); 
  
 module.exports = router;
