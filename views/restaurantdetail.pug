@@ -1,0 +1,28 @@
+extends layout 
+ 
+block content 
+  h1= title 
+  if (toShow == null)
+    h2 No instance to Create
+  else
+  if (toShow == null)
+    h2 No instance to delete
+  else
+    - let restaurantID = toShow._id
+    - let restaurantType = toShow.restaurantType
+    - let price = toShow.price
+    - let capacity = toShow.capacity
+
+    div 
+    div.row 
+      div(class='costumeAttr mr-3') restaurant ID is: 
+      div #{restaurantID} 
+    div.row 
+      div(class='costumeAttr mr-3') restaurant Type is: 
+      div #{restaurantType} 
+    div.row 
+      div(class='costumeAttr mr-3') restaurant Size is: 
+      div #{price} 
+    div.row 
+      div(class='costumeAttr mr-3') restaurant Capacity is: 
+      div #{capacity}

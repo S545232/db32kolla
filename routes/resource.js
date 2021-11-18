@@ -28,3 +28,15 @@ router.get('/restaurant/:id', restaurant_controller.restaurant_detail);
 router.get('/restaurant', restaurant_controller.restaurant_view_all_Page); 
  
 module.exports = router;
+
+
+router.get('/detail', restaurant_controller.restaurant_view_one_Page); 
+
+router.get('/create', restaurant_controller.restaurant_create_Page); 
+
+router.get('/update',restaurant_controller.restaurant_update_Page);
+
+router.get('/delete', restaurant_controller.restaurant_delete_Page);
+
+router.delete('/restaurant/:id',restaurant_controller.restaurant_delete);
+
