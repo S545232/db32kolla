@@ -2,14 +2,25 @@ extends layout
 
 block content
   h1= title
-  - let restaurants  = [{restaurantType:"Veg", price: 1000, capacity:"50 members"},{restaurantType:"Non-Veg", price: 800, capacity:"20 members"},{restaurantType:"Chinese", price: 400, capacity:"250 members"}]
-  div(class="container-fluid mt-3")
-  div(class="row")
-    each restaurant,index in restaurants
-        div(class="col-sm-4" onclick=`buy(${index})`) #{restaurant.restaurantType} - #{restaurant.price} - #{restaurant.capacity}
+  - let restaurants  = results;
+  div(class="container-fluid mt-3 mystyle")
+    - let create = `dispatch(\"/restaurant/create\")`
+    button.btn(class="btn-secondary ml-1", onClick=create) Create New restaurant
+    div(class="row m-1 paddingcustom")
+      each restaurant,index in restaurants
+        - let destination = `dispatch(\"/restaurant/update?id=${restaurant._id}\")` 
+        - let detail = `dispatch(\"/restaurant/detail/?id=${restaurant._id}")`
+        - let deleteItem = `dispatch(\"/restaurant/delete/?id=${restaurant._id}")`
+        div(class="col-sm-5 values") #{restaurant.restaurantType} - #{restaurant.price} - #{restaurant.capacity}
+          button.btn( class="btn-primary buttonCustom", onclick= destination) Update
+          button.btn( class="btn-success buttonCustom", onclick= detail) Details
+          button.btn( class="btn-danger buttonCustom", onclick= deleteItem) Delete
+    
     script.
-     
       function buy(itemNo)
       {
         alert(`You purchased Item ${itemNo+1}`)
+      }
+      function dispatch(path){ 
+        window.location.href=path 
       }

@@ -2,7 +2,9 @@ extends layout
  
 block content 
   h1= title 
- 
+  if (toShow == null)
+    h2 No instance to Create
+  else
   - let restaurantid = toShow._id 
   - let restaurantType = toShow.restaurantType 
   - let restaurantprice = toShow.price 
@@ -14,13 +16,13 @@ block content
   - let actionid = "/resource/restaurant/" + restaurantid 
   form(id='restaurantForm', action= actionid, method="PUT") 
     div.form-group 
-        label.restaurantAttr(for='restaurantType') restaurant type 
+        label.costumeAttr(for='restaurantType') restaurant type 
         input#restaurantType(type='String', name='restaurantType', value= restaurantType ) 
     div.form-group 
-        label.restaurantAttr(for='price') restaurant price 
-        input#price(type='Number', name='price', value= restaurantize ) 
+        label.costumeAttr(for='price') restaurant price 
+        input#price(type='Number', name='price', value= restaurantprice ) 
     div.form-group 
-        label.restaurantAttr(for='capacity') restaurant capacity 
+        label.costumeAttr(for='capacity') restaurant capacity 
         input#capacity(type='String', name='capacity', value= restaurantcapacity ) 
     input(type="submit") 
  
